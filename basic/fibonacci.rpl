@@ -1,0 +1,11 @@
+// It works on all versions
+
+0 "a" =
+1 "b" =
+100 "c" = // Number to set how many times does it calculate
+0 "i" =
+a b + "a" =
+a b - "b" =
+a . " " .
+i 1 + : "i" = c [LT] 7 1 ;
+NL
