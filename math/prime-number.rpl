@@ -1,0 +1,9 @@
+100 "len" = // Number for range to calculate ( 1 ... len )
+wd-begin
+  % 0 [EQ]
+wd-end(1) x
+wd-begin
+  2 [EQ]
+wd-end(1) y
+1 : len + ... : #*x #-#-+ #+y len ]
+1 : len + ... #& .NL
