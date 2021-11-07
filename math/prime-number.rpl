@@ -1,3 +1,5 @@
+// It works on >= v1.4.0 RC1
+
 100 "len" = // Number for range to calculate ( 1 ... len )
 wd-begin
   % 0 [EQ]
