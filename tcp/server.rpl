@@ -1,0 +1,47 @@
+// It works on >= 1.4.0 RC2
+
+0 "wait" =
+0x0d $>? 0x0a $>? + "CRLF" =
+wd-begin
+  // wait 1 [EQ] #LINE 1 ;
+  1 "wait" =
+  : "s" =
+  wd-begin
+    : "recData" =
+    0x1b $>? "[97m" + .
+    .
+    0x1b $>? "[m" + .
+    recData recData ][ 4 - @ $>?
+    recData recData ][ 3 - @ $>? +
+    recData recData ][ 2 - @ $>? +
+    recData recData ][ 1 - @ $>? +
+    CRLF CRLF + [EQ] ?(
+      s
+      "server-index.html" #>
+      "<script>" +
+      "document.getElementById('version').innerText='" + #VERSION.FULL + "';" +
+      "document.getElementById('image').src='" + "server-image.base64" #> + "';" +
+      "</script>" + "msg" =
+      0x0d $>? 0x0a $>? + "CRLF" =
+      "HTTP/1.1 200 OK" CRLF +
+      "Content-Type: text/html" CRLF + +
+      "Content-Length: " msg ][ + CRLF + +
+      CRLF +
+      msg CRLF + +
+      CRLF + "res" = res ~<
+      // 0x1b $>? "[93m" res + 0x1b $>? "[m" + + + .NL
+    ).
+  wd-end onData
+  "data" >>onData
+  wd-begin
+    0x1b $>? "[91mDisconnection" 0x1b $>? "[m" + + + .NL
+  0 "wait" =
+  wd-end onEnd
+  "end" >>onEnd
+  wd-begin
+    "Close" .NL
+  wd-end onClose
+  "close" >>onClose
+  0x1b $>? "[93mConnection" 0x1b $>? "[m" + + + .NL
+wd-end onConnect
+0 ~# "connection" >>onConnect 8080 ~!
