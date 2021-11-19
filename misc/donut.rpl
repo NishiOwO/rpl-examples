@@ -1,0 +1,48 @@
+// Donut.c but in RPL++
+// It works on >= 1.4.0C
+
+wd-begin
+  0x1b $>? "[1;1H" + .
+  0x1b $>? "[2J" + .
+wd-end cls
+cls
+0x0a $>? "LF" =
+undef "tmr1" =
+undef "tmr2" =
+1 "A" =
+1 "B" =
+wd-begin
+  0 ] "b" =
+  1760 [$]- "z" =
+  A 0.14 + "A" =
+  B 0.06 + "B" =
+  A Exp::cos "cA" =
+  A Exp::sin "sA" =
+  B Exp::cos "cB" =
+  B Exp::sin "sB" =
+  0 "k" =
+    b k " " LF 2 ] k 80 % 79 [EQ] @ [$]< "b" =
+  k 1 + : "k" = 1760 [LT] #LINE 1 - 1 ;
+  0 "j" = #LINE "forJ" =
+    j Exp::cos "ct" =
+    j Exp::sin "st" =
+    0 "i" = #LINE "forI" =
+      i Exp::sin "sp" =
+      i Exp::cos "cp" =
+      ct 2 + "h" =
+      1 sp h sA * * st cA * + 5 + / "D" =
+      sp h cA * * st sA * - "t" =
+      0 30 D * cp h cB * * t sB * - * 40 + |. "x" =
+      0 15 D * cp h sB * * t cB * + * 12 + |. "y" =
+      x 80 y * + "o" =
+      0 st sA * sp ct cA * * - cB * sp ct sA * * - st cA * - cp ct sB * * - 8 * |. "N" =
+      y 22 [LT] y 0 [GE] x 0 [GE] x 79 [LT] D z o @ [GT] & & & & ~ #LINE 3 + 1 ;
+      z o D [$]< "z" =
+      b o ".,-~:;=!*#$@" 0 N 2 ] N 0 [GT] @ @ [$]< "b" = #LINE 1 + 1 #
+      --
+    i 0.04 + : "i" = 6.28 [LT] forI 1 + 1 ;
+  j 0.14 + : "j" = 6.28 [LT] forJ 1 + 1 ;
+  cls b "" [$], .NL
+wd-end asciiframe
+asciiframe
+#LINE 1 - 1 #
